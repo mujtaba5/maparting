@@ -499,13 +499,13 @@ $this->load->view('layouts/header'); ?>
                       <div class="row html-simple-layout simple-layout-row-2">
                       <div class="col-md-6"></div>
                         <div class="col-md-2 col-simple-layout-firstRow" align="right">
-                          05
+                          00
                         </div>   
                        <div class="col-md-2 col-simple-layout-firstRow spanDiv" align="right">
-                       <span>:</span>16
+                       <span>:</span>00
                         </div>      
                         <div class="col-md-2 col-simple-layout-firstRow spanDiv2" align="right">
-                         <span>'</span> 25
+                         <span>'</span> 00
                         </div>
                       </div>
                       
@@ -1610,6 +1610,7 @@ $this->load->view('layouts/header'); ?>
 }
 
 function html2canvas_lightBitBlur(){
+  $('.mapboxgl-ctrl-top-right').hide();
 
   html2canvas(document.getElementById("test-shadow"),
                     {
@@ -1623,14 +1624,14 @@ function html2canvas_lightBitBlur(){
                         anchorTag.target = '_blank';
                         anchorTag.click();
                     });
-           
+                    $('.mapboxgl-ctrl-top-right').show();
+
 }
 
     function generateMap() {
 
 
       'use strict';
-      $('.mapboxgl-ctrl-top-right').hide();
       html2canvas_lightBitBlur();
       // console.log('saaa');
 //       var makeHighResScreenshot = function(srcEl, destIMG, dpi) {
