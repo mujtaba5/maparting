@@ -1,0 +1,619 @@
+  <!doctype html>
+  <html lang="en">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+  <head>
+    <title>Streetmap Editor</title>
+    <link rel="shortcut icon" type="image/png" href="images/favicon.jpg" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.css" /> -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mapstyle.css">
+    <script src="js/html2canvas.js"></script>
+    <script src="js/merge.js"></script>
+  </head>
+  <style>
+    .parentDiv {
+      position: absolute;
+      width: 100%;
+      background-color: black;
+      color: white;
+    }
+
+    .nav {
+      text-align: center;
+    }
+  </style>
+
+  <style>
+    .legend {
+      background-color: #fff;
+      border-radius: 3px;
+      bottom: 30px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      padding: 10px;
+      position: absolute;
+      right: 10px;
+      z-index: 1;
+    }
+
+    .legend h4 {
+      margin: 0 0 10px;
+    }
+
+    .legend div span {
+      border-radius: 50%;
+      display: inline-block;
+      height: 10px;
+      margin-right: 5px;
+      width: 10px;
+    }
+  </style>
+
+  <body>
+
+    <div class="p-2 announcment_bar">
+      <span class="m-0 p-0 announcment_text">Singles Day Sale 🤍 Buy a print + frame and get 15% OFF. This week only!</span>
+      <!-- <br>
+    <span class="m-0 p-0" style="color:white;font-size:10px;">Not valid for the new Nursery Collection</span> -->
+    </div>
+    <div class="navbar navbar-expand-lg navbar-light bg-light" style="text-align: center;">
+      <!-- <div class="container"> -->
+      <div align="center">
+        <span class="navbar-brand m-0 p-0" href="#" style="font-family: 'Brush Script MT', cursive !important;"><img
+            class="image_style" src="images/logo.png" height="30px" width="50px" /><strong>Map
+            Editor</strong></span>
+      </div>
+    </div>
+    <div class="wrapper d-flex align-items-stretch">
+
+      <!-- <form onsubmit="generateMap(); return false;" id="config"> -->
+      
+          <nav id="sidebar">
+            <div>
+              <div class="sidebar_style">
+                <h6 class="h1_style">Create your Map Art poster!</h6>
+                <p class="p_style">Change artwork, labels and appearance</p>
+              </div>
+              <form onsubmit="generateMap(); return false;" id="config">
+                <fieldset id="config-fields">
+
+                  <ul class="list-unstyled components mb-5 p-2">
+                  
+                    <li>
+                      <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle main_title"
+                        onclick="myFunction('Demo1')">Map styles</a>
+                      <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                          <div id="Demo1" class="w3-hide">
+                            <!-- <strong> -->
+                            <!-- <a class="w3-button w3-block w3-left-align" onclick="changeStyle('./styles/basic-style.json')">Mapbox Basic 
+                          <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                        <a class="w3-button w3-block w3-left-align" onclick="changeStyle('./styles/bright-style.json')">Mapbox Bright
+                          <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                        <a class="w3-button w3-block w3-left-align" onclick="changeStyle('./styles/satellite-style.json')">Mapbox Satellite
+                          <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                        <a class="w3-button w3-block w3-left-align" onclick="changeStyle('./styles/outdoors-style.json')">Mapbox Outdoors
+                          <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                        <a class="w3-button w3-block w3-left-align" onclick="changeStyle('./styles/light-style.json')">Mapbox Light
+                          <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                        <a class="w3-button w3-block w3-left-align" onclick="changeStyle('./styles/streets-style.json')">Mapbox Streets
+                          <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a> -->
+                            <div class="row p-2">
+                              <div class="col-lg-3" align="center">
+                                <a class="w3-button mapimage_style"
+                                  onclick="changeStyle('./styles/monochrome-sky-style.json')">
+                                  <img class="image_style" src="images/blue.png" height="20%" width="65%"
+                                    style=" border: 4px solid skyblue;" />
+                                  <p class="p-1"><strong>Sky Blue</strong> </p>
+                                </a>
+
+                              </div>
+                            
+                              <div class="col-lg-3" align="center">
+                                <a class="w3-button mapimage_style"
+                                  onclick="changeStyle('./styles/monochrome-golden-style.json')">
+                                  <img class="image_style" src="images/golden.png" height="20%" width="65%"
+                                    style=" border: 4px solid goldenrod;" />
+                                  <p class="p-1"><strong>Golden</strong> </p>
+                                </a>
+                              </div>
+                              <div class="col-lg-3" align="center">
+                                <a class="w3-button mapimage_style"
+                                  onclick="changeStyle('./styles/monochrome-pink-style.json')">
+                                  <img class="image_style" src="images/pink.png" height="20%" width="65%"
+                                    style=" border: 4px solid pink" />
+                                  <p class="p-1"><strong>Pink</strong> </p>
+                                </a>
+
+                              </div>
+                              <div class="col-lg-3" align="center">
+                                <a class="w3-button mapimage_style"
+                                  onclick="changeStyle('./styles/monochrome-dark-style.json')">
+                                  <img class="image_style" src="images/dark.png" height="20%" width="65%"
+                                    style=" border: 4px solid black" />
+                                  <p class="p-1"><strong>Dark</strong> </p>
+                                </a>
+                              </div>
+                              <div class="col-lg-3" align="center">
+                                <a class="w3-button mapimage_style"
+                                  onclick="changeStyle('./styles/monochrome-navy-style.json')">
+                                  <img class="image_style" src="images/navy.png" height="20%" width="65%"
+                                    style=" border: 4px solid navy" />
+                                  <p class="p-1"><strong>Navy</strong> </p>
+                                </a>
+                              </div>
+                              <div class="col-lg-3" align="center">
+                                <a class="w3-button mapimage_style"
+                                  onclick="changeStyle('./styles/monochrome-navy-style.json')">
+                                  <img class="image_style" src="images/navy.png" height="20%" width="65%"
+                                    style=" border: 4px solid navy" />
+                                  <p class="p-1"><strong>Navy</strong> </p>
+                                </a>
+                              </div>
+                              <div class="col-lg-3" align="center">
+                                <a class="w3-button mapimage_style"
+                                  onclick="changeStyle('./styles/green.json')">
+                                  <img class="image_style" src="images/navy.png" height="20%" width="65%"
+                                    style=" border: 4px solid green" />
+                                  <p class="p-1"><strong>Green</strong> </p>
+                                </a>
+                              </div>
+                              <span class="p-2" style="font-size: 13px;color: rgba(76,89,106,.5);margin: 0;line-height: 1.4;">
+                              </span>
+                            </div>
+                            <!-- <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/basic/style.json')">Klokantech Basic
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                      <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/bright/style.json')">Klokantech Bright
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                      <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/darkmatter/style.json')">Klokantech Dark Matter
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                      <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/pastel/style.json')">Klokantech Pastel
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                      <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/positron/style.json')">Klokantech Positron
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                      <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/streets/style.json')">Klokantech Streets
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                      <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/toner/style.json')">Klokantech Toner
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                      <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/topo/style.json')">Klokantech Topo
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                      <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/topographique/style.json')">Klokantech Topographique
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>
+                      <a class="w3-button w3-block w3-left-align" onclick="changeStyle('https://api.maptiler.com/maps/voyager/style.json')">Klokantech Voyager
+                        <img src="https://docs.mapbox.com/mapbox-gl-js/assets/cat.png" height="30px" width="30px" align="left"/> </a>  -->
+                            <!-- </strong> -->
+                          </div>
+                        </li>
+                      </ul>
+                      <ul class="collapse list-unstyled" id="homeSubmenu">
+
+                        <select id="styleSelect" class="form-control" style="display: none;">
+                          <!-- <option value="./styles/basic-style.json">Mapbox Basic</option>
+                <option value="./styles/bright-style.json">Mapbox Bright</option>
+                <option value="./styles/satellite-style.json">Mapbox Satellite</option>
+                <option value="./styles/outdoors-style.json">Mapbox Outdoors</option>
+                <option value="./styles/light-style.json">Mapbox Light</option>
+                <option value="./styles/streets-style.json">Mapbox Streets</option> -->
+                          <option value="./styles/monochrome-sky-style.json">Mapbox Monochrome Sky</option>
+                          <option value="./styles/monochrome-golden-style.json">Mapbox Monochrome Golden</option>
+                          <option value="./styles/monochrome-pink-style.json">Mapbox Monochrome Pink</option>
+                          <option value="./styles/monochrome-dark-style.json">Mapbox Monochrome Dark</option>
+                          <option value="./styles/monochrome-navy-style.json">Mapbox Monochrome Navy</option>
+                          <option value="https://api.maptiler.com/maps/basic/style.json">Klokantech Basic</option>
+                          <option value="https://api.maptiler.com/maps/bright/style.json">Klokantech Bright</option>
+                          <option value="https://api.maptiler.com/maps/darkmatter/style.json">Klokantech Dark Matter
+                          </option>
+                          <option value="https://api.maptiler.com/maps/pastel/style.json">Klokantech Pastel</option>
+                          <option value="https://api.maptiler.com/maps/positron/style.json">Klokantech Positron</option>
+                          <option value="https://api.maptiler.com/maps/streets/style.json">Klokantech Streets</option>
+                          <option value="https://api.maptiler.com/maps/toner/style.json">Klokantech Toner</option>
+                          <option value="https://api.maptiler.com/maps/topo/style.json">Klokantech Topo</option>
+                          <option value="https://api.maptiler.com/maps/topographique/style.json">Klokantech Topographique
+                          </option>
+                          <option value="https://api.maptiler.com/maps/voyager/style.json">Klokantech Voyager</option>
+                        </select>
+                      </ul>
+                    </li>
+                    <li hidden>
+                      <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Zoom
+                        Levels</a>
+                      <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                          <input type="text" class="form-control" id="zoomInput" autocomplete="off" value="">
+                        </li>
+
+                      </ul>
+                    </li>
+
+                    <li>
+                      <a href="#Units" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"
+                      style="display: none;" >Units</a>
+                      <ul class="collapse list-unstyled" id="Units">
+                        <li>
+                          <div class="form-group">
+                            <label class="radio-inline">
+                              <input type="radio" name="unitOptions" value="in" id="inUnit" checked> Inch
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="unitOptions" value="mm" id="mmUnit"> Millimeter
+                            </label>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#Frames" data-toggle="collapse" aria-expanded="false" onclick="myFunction('Demo3')" class="dropdown-toggle main_title"
+                        >Frames</a>
+                        <div id="Demo3" class="w3-hide ">
+                          <ul class="collapse list-unstyled" id="Frames" >
+                            <li >
+                              <div class="row col-lg-12" style="border-bottom: 0px solid #eee !important;">
+                                <div class="col-lg-4 p-2 "   >
+                                  <a class="w3-button w3-block rm_border-bottom">
+                                    <p  class="dimension_box active" onclick="classToAdd('customName_bottom_blur mapboxgl-ctrl-bottom-left pt-3')">Smooth</p>
+                                  </a>
+                                </div>
+                                <div class="col-lg-4 p-2 " >
+                                  <a class="w3-button w3-block rm_border-bottom">
+                                    <p  class="dimension_box " onclick="classToAdd('customName_bottom_modern mapboxgl-ctrl-bottom-left pt-3')">Modern</p>
+                                  </a>
+                                </div>
+                                <div class="col-lg-4 p-2" >
+                                  <a class="w3-button w3-block rm_border-bottom">
+                                    <p class="dimension_box" onclick="classToAdd('customName_bottom mapboxgl-ctrl-bottom-left pt-3')">Humble</p>
+                                  </a>
+                                </div>
+                                <div class="col-lg-4 p-2" >
+                                  <a class="w3-button w3-block rm_border-bottom">
+                                    <p class="dimension_box" onclick="classToAdd('customName_Nara mapboxgl-ctrl-bottom-left pt-3')">Nara</p>
+                                  </a>
+                                </div>
+                                <div class="col-lg-4 p-2" >
+                                  <a class="w3-button w3-block rm_border-bottom">
+                                    <p class="dimension_box" onclick="classToAdd('customName_Playroom mapboxgl-ctrl-bottom-left pt-3')">PlayRoom</p>
+                                  </a>
+                                </div>
+                                <div class="col-lg-4 p-2" >
+                                  <a class="w3-button w3-block rm_border-bottom">
+                                    <p class="dimension_box" onclick="classToAdd('customName_Velentine mapboxgl-ctrl-bottom-left pt-3')"><span>Velentine</span></p>
+                                  </a>
+                                </div>
+                                <div class="col-lg-4 p-2" >
+                                  <a class="w3-button w3-block rm_border-bottom" >
+                                    <p class="dimension_box" onclick="classToAdd('customName_Legend mapboxgl-ctrl-bottom-left pt-3')"><span>Legend</span></p>
+                                  </a>
+                                </div>
+                               
+                                
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      
+                    </li>
+                    <li>
+                      <a href="#Dimensions" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle main_title"
+                        onclick="myFunction('Demo2')">Dimensions</a>
+                      <div id="Demo2" class="w3-hide ">
+                        <span class="lable">Select poster size</span>
+                        <div class="row" style="border-bottom: 0px solid #eee !important;">
+                          <div class="col-lg-4 pt-2 " align="center"  style="border-bottom: 0px solid #eee !important;">
+                            <a class="w3-button w3-block rm_border-bottom" onclick="changeDimension('6.2', '4.2')" >
+                              <p class="dimension_box active pb-2 pt-2" >10 x 15</p>
+                            </a>
+                          </div>
+                          <div class="col-lg-4 pt-2" align="center">
+                            <a class="w3-button w3-block rm_border-bottom" onclick="changeDimension('6.8','4.7')">
+                              <p class="dimension_box pb-2 pt-2 ">18 x 24</p>
+                            </a>
+                          </div>
+                          <div class="col-lg-4 pt-2" align="center">
+                            <a class="w3-button w3-block rm_border-bottom" onclick="changeDimension('7', '5')">
+                              <p class="dimension_box pb-2 pt-2" >24 x 36</p>
+                            </a>
+                          </div>
+                          
+                        </div>
+                        <span class="underLine">Switch size standards <strong>CM (EU)</strong> Inch (US)</span>
+                        <br>
+                        <div class="pt-2">
+                        <span class="lable">Select orientation</span>
+                        <div class="row ">
+                          <div class="col-lg-6 pt-2" align="center">
+                            <a  class="w3-button rm_border-bottom" onclick="changeDimension('6.2', '4.2')">
+                              <p class="potrait_box pb-2 pt-2 active" >Potrait</p>
+                            </a>
+                          </div>
+                          <div class="col-lg-6 pt-2" align="center">
+                            <a  class="w3-button w3-block rm_border-bottom" onclick="changeDimension('6', '9')">
+                              <p class="potrait_box pb-2 pt-2 " >Landscape</p>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                        <ul class="collapse list-unstyled" id="Dimensions" style="display: none;">
+                          <li>
+
+                            <div class="form-group" id="widthGroup">
+                              <label for="widthInput">Width</label>
+                              <input type="text" class="form-control" id="widthInput" autocomplete="off" value="4">
+                            </div>
+                            <div class="form-group" id="heightGroup">
+                              <label for="heightInput">Height</label>
+                              <input type="text" class="form-control" id="heightInput" autocomplete="off" value="5">
+                            </div>
+
+                          </li>
+                        </ul>
+                    </li>
+                    <li hidden>
+                      <a href="#DPI" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">DPI(Display Per
+                        Inch)</a>
+                      <ul class="collapse list-unstyled" id="DPI">
+                        <li>
+                          <div class="form-group" id="dpiGroup">
+                            <label for="dpiInput">DPI</label>
+                            <input type="text" class="form-control" id="dpiInput" autocomplete="off" value="300">
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#Custom" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle main_title">Customize the headers</a>
+                      <ul class="collapse list-unstyled" id="Custom">
+                        <li>
+                          <div class="input-group mb-3">
+                            <div class="input-group-append">
+                              <span class="input-group-text" id="basic-addon2">Headline</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="New York i.e" id="headerInput" onchange="textchanged()" value="Paris">
+                          </div>
+                          <div class="input-group mb-3">
+                            <div class="input-group-append">
+                              <span class="input-group-text" id="basic-addon2">Divider</span>
+                            </div>
+                            <input type="text" class="form-control" id="headerInput2" placeholder="United States i.e" value="France" onchange="textchanged2()">
+                          </div>
+                          <div class="input-group mb-3" id="latGroup">
+                            <div class="input-group-append">
+                              <span class="input-group-text" id="basic-addon2">Latitude</span>
+                            </div>
+                            <input type="text" class="form-control" id="latInput" autocomplete="off" value="">
+                          </div>
+                          <div class="input-group mb-3" id="lonGroup">
+                            <div class="input-group-append">
+                              <span class="input-group-text" id="basic-addon2">Longitude</span>
+                            </div>
+                            <input type="text" class="form-control" id="lonInput" autocomplete="off" value="">
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                    <!-- <li> -->
+                    <div class="copyright_style">
+                      <a class="copyright_text"> @Copyright and attribution information</a>
+                    </div>
+                    <!-- </li> -->
+                    <li>
+                        <button type="submit" class="col-lg-12 btn btn-primary btn-lg" id="generate-btn" >Generate Map</button>
+                        <!-- <div id="spinner"></div> -->
+                    </li>
+                  </ul>
+                </fieldset>
+              </form>
+            </div>
+          </nav>
+      </form>
+      </fieldset>
+
+      <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel panel-default">
+              <!-- <div class="panel-heading">
+                <h3 class="panel-title">Map</h3>
+              </div> -->
+              <div class="panel-body map-container">
+                <div class="test-shadow">
+                <div id="map">
+                  <div id="mainFrame" class="mapboxgl-ctrl-bottom-left customName_bottom_blur pt-3" align="center">
+                    <p id="frameText" class="font_style mb-0" >Paris</p>
+                    <p id="frameText2" class="font_style_subheading mt-0 mb-0 font-color" ><strong>France</strong></p>
+                    <p class="mt-0 font-color">N36º05'18" W95º55'27"</p>
+                  </div>
+                </div>
+                  <!-- <div class="mapboxgl-ctrl-bottom-left customName_bottom_border " >
+                    <span style="color:black" class="style">Gujranwala</span>
+                    <span style="color:black" class="style">Pakistan</span>
+                    <p class="style">N36º05'18" W95º55'27"</p>
+                  </div>
+                  <div class="mapboxgl-ctrl-bottom-left customName_bottom pt-3" align="center">
+                    <h6>Gujranwala</h6>
+                    <p >N36º05'18" W95º55'27"</p>
+                  </div> -->
+                </div>
+              </div>
+              <div style="display: none" id="test"></div>
+              <div style="display: none" id="dumb"></div>
+              <img style="display: none" id="pp">
+              <img id="final">
+              <canvas style="display: none" id="myCanvas"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="panel-body" id="openmaptiles-attribution" style="display: none !important;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer-section">
+      <div class="container">
+          <div class="footer-content pt-5 pb-5">
+              <div class="row">
+                  <div class="col-xl-4 col-lg-4 mb-50">
+                      <div class="footer-widget">
+                          <div class="footer-logo">
+                            <span class="navbar-brand m-0 p-0" href="#" style="color: white;font-family: 'Brush Script MT', cursive !important;"><img
+                                class="image_style" src="images/logo.png" height="30px" width="50px" /><strong>Map
+                                Editor</strong></span>
+                            <!-- <a href="index.html"><img src="https://i.ibb.co/QDy827D/ak-logo.png" class="img-fluid" alt="logo"></a> -->
+                          </div>
+                          <div class="footer-text">
+                              <p>Sign up to get first dibs on new launches, promos, 5% off your first purchase, and other news.</p>
+                          </div>
+                          <div class="footer-social-icon">
+                              <span>Follow us</span>
+                              <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                              <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
+                              <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                      <div class="footer-widget">
+                          <div class="footer-widget-heading">
+                              <h3>Useful Links</h3>
+                          </div>
+                          <ul>
+                              <li><a href="#">Home</a></li>
+                              <li><a href="#">about</a></li>
+                              <li><a href="#">services</a></li>
+                              <li><a href="#">portfolio</a></li>
+                              <li><a href="#">Contact</a></li>
+                              <li><a href="#">About us</a></li>
+                              <li><a href="#">Our Services</a></li>
+                              <li><a href="#">Expert Team</a></li>
+                              <li><a href="#">Contact us</a></li>
+                              <li><a href="#">Latest News</a></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                      <div class="footer-widget">
+                          <div class="footer-widget-heading">
+                              <h3>Subscribe</h3>
+                          </div>
+                          <div class="footer-text mb-25">
+                              <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                          </div>
+                          <div class="subscribe-form">
+                              <form action="#">
+                                  <input type="text" placeholder="Email Address">
+                                  <button>Send</button>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="copyright-area">
+          <div class="container">
+              <div class="row">
+                  <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                      <div class="copyright-text">
+                          <p>Copyright &copy; 2021, All Right Reserved <a href="https://www.fiverr.com/gis_studio?up_rollout=true">GIS Studio</a></p>
+                      </div>
+                  </div>
+                  <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                      <div class="footer-menu">
+                          <ul>
+                              <li><a href="#">Home</a></li>
+                              <li><a href="#">Terms</a></li>
+                              <li><a href="#">Privacy</a></li>
+                              <li><a href="#">Policy</a></li>
+                              <li><a href="#">Contact</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script
+      src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.min.js"></script>
+    <link rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.2/mapbox-gl-geocoder.css" type="text/css">
+
+    <!--<script type="text/javascript" src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script> -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/canvas-toblob/0.1/canvas-toBlob.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/filesaver.js@1.3.4/FileSaver.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jspdf@1.4.1/dist/jspdf.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script>
+      $('p, .potrait_box').click(function () {
+
+        $('p, potrait_box.active').removeClass('active');
+        $(this).addClass('active');
+      });
+    </script>
+    <script>
+      $('p, .dimension_box').click(function () {
+
+        $('p, dimension_box.active').removeClass('active');
+        $(this).addClass('active');
+      });
+     
+    </script>
+    <!-- <script>
+      $('p, .dimension_box').click(function () {
+
+        $('p, dimension_box.active').removeClass('active');
+        $(this).addClass('active');
+      });
+    </script> -->
+    <script>
+      function myFunction(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+          x.className += " w3-show";
+        } else {
+          x.className = x.className.replace(" w3-show", "");
+        }
+      }
+    </script>
+   <script>
+      tinymce.init({
+            selector:'#editor',
+            menubar: false,
+            statusbar: false,
+            plugins: 'autoresize anchor autolink charmap code codesample directionality fullpage help hr image imagetools insertdatetime link lists media nonbreaking pagebreak preview print searchreplace table template textpattern toc visualblocks visualchars',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help fullscreen ',
+            skin: 'bootstrap',
+            toolbar_drawer: 'floating',
+            min_height: 200,           
+            autoresize_bottom_margin: 16,
+            setup: (editor) => {
+                editor.on('init', () => {
+                    editor.getContainer().style.transition="border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out"
+                });
+                editor.on('focus', () => {
+                    editor.getContainer().style.boxShadow="0 0 0 .2rem rgba(0, 123, 255, .25)",
+                    editor.getContainer().style.borderColor="#80bdff"
+                });
+                editor.on('blur', () => {
+                    editor.getContainer().style.boxShadow="",
+                    editor.getContainer().style.borderColor=""
+                });
+            }
+        });
+   </script>
+  </body>
+
+  </html>
